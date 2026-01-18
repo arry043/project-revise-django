@@ -1,0 +1,19 @@
+{% extends "layout.html" %} 
+{% block title %}Arry | Tweet{% endblock %} 
+{% block content %}
+
+
+<div class="text-center mt-5">
+    <h1>
+        {% if form.instance.pk %}Edit Tweet {% else %} Create Tweet {% endif %}
+    </h1>
+    
+    <form method="post" class="row g-3 d-flex justify-content-center" encrype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button class="btn btn-warning col-sm-3" type="submit">Save</button>
+    </form>  
+
+</div>
+
+{% endblock %}
