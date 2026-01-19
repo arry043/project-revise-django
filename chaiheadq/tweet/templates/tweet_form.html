@@ -1,19 +1,104 @@
-{% extends "layout.html" %} 
-{% block title %}Arry | Tweet{% endblock %} 
+{% extends "layout.html" %}
+{% block title %}Arry | Tweet{% endblock %}
+
+{% block style %}
+<style>
+    .tweet-form-card {
+        max-width: 520px;
+        margin: auto;
+        border-radius: 18px;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    .tweet-form-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+    }
+
+    .form-control:focus {
+        border-color: #ffb703;
+        box-shadow: 0 0 0 0.2rem rgba(255,183,3,.25);
+    }
+
+    .upload-box {
+        border: 2px dashed #ced4da;
+        border-radius: 12px;
+        padding: 18px;
+        cursor: pointer;
+        transition: 0.3s;
+        text-align: center;
+    }
+
+    .upload-box:hover {
+        border-color: #ffb703;
+        background: #fff8e6;
+    }
+
+    .save-btn {
+        background: linear-gradient(135deg, #ffb703, #fb8500);
+        border: none;
+        color: #000;
+        font-weight: 600;
+        border-radius: 30px;
+        transition: 0.3s;
+    }
+
+    .save-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        color: #000;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 
+<div class="container mt-5">
 
-<div class="text-center mt-5">
-    <h1>
-        {% if form.instance.pk %}Edit Tweet: {% else %} Create Tweet: {% endif %}
-    </h1>
-    
-    <form method="post" class="row g-3 d-flex justify-content-center m-3 " enctype="multipart/form-data">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button class="btn btn-warning col-sm-3" type="submit">Save</button>
-    </form>
-    <a href="{% url "tweet_list" %}" class="underline">Back to Tweet</a>
+    <div class="card tweet-form-card p-4">
+
+        <h3 class="text-center mb-4">
+            {% if form.instance.pk %} ✏️ Edit Tweet {% else %} 🚀 Create Tweet {% endif %}
+        </h3>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- TEXT FIELD -->
+            <div class="mb-3 text-start">
+                <label class="form-label fw-semibold">Your Tweet</label>
+                {{ form.text }}
+            </div>
+
+            <!-- PHOTO FIELD -->
+            <div class="mb-4">
+                <label class="form-label fw-semibold">Upload Photo</label>
+
+                <div class="upload-box">
+                    {{ form.photo }}
+                    <small class="text-muted d-block mt-2">
+                        JPG, PNG allowed
+                    </small>
+                </div>
+            </div>
+
+            <!-- BUTTON -->
+            <div class="d-grid">
+                <button type="submit" class="btn save-btn py-2">
+                    Save Tweet 🚀
+                </button>
+            </div>
+
+        </form>
+
+        <div class="text-center mt-3">
+            <a href="{% url 'tweet_list' %}" class="text-decoration-none">
+                ← Back to Tweets
+            </a>
+        </div>
+
+    </div>
 
 </div>
 
