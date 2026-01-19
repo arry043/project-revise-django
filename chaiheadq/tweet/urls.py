@@ -4,7 +4,7 @@ from tweet import views
 urlpatterns = [
     # path('', views.index, name='index'),
     path('', views.tweet_list, name='tweet_list'),
-    path('tweet_create/', views.tweet_create, name='tweet_create'),
-    path('<int:tweet_id>/tweet_edit/', views.tweet_edit, name='tweet_edit'),
-    path('<int:tweet_id>/tweet_delete/', views.tweet_delete, name='tweet_delete'),
+    path('create/', views.tweet_create, name='tweet_create'),
+    path('<int:tweet_id>/edit/', views.tweet_edit, name='tweet_edit'),
+    path('<int:tweet_id>/delete/', views.tweet_delete, name='tweet_delete'),
 ]
